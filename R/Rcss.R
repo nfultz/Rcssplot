@@ -107,7 +107,7 @@ print.Rcss <- function(x, ...) {
 ##' about the selector, including subclasses. If FALSE, function omits
 ##' detailed information about subclasses. 
 ##' @export 
-printRcss <- function(Rcss, selector = NULL, verbose = FALSE) {
+printRcss <- function(Rcss, selector, verbose = FALSE) {
   
   ## some basic checks
   if (class(Rcss) != "Rcss") {
@@ -115,7 +115,7 @@ printRcss <- function(Rcss, selector = NULL, verbose = FALSE) {
   }
   
   ## if selector is not specified, print all the available ones
-  if (is.null(selector)) {
+  if (is.missing(selector)) {
     stopCF(paste0("printRcss: must specify selector.\n",
                "Defined selectors: ",paste(names(Rcss), collapse = ", "),
                "\n"))
@@ -187,14 +187,7 @@ print.RcssProperties <- function(RcssProperties,
 ## makes Rcss structure for one Rcss selector
 ## (includes space for base properties and for subclasses)
 RcssPropertiesConstructor <- function() {
-  ans <- list()
-  ## RcssProperties object will contain two lists,
-  ## one list for basic properties
-  ## one list for subclasses
-  ans$base <- list()
-  ans$classes <- list()
-  class(ans) <- "RcssProperties"
-  return(ans)  
+  structure(list(base=list(), classes=list(), class="RcssProperties"))
 }
 
 
@@ -202,9 +195,7 @@ RcssPropertiesConstructor <- function() {
 ## creates an empty Rcss object (i.e. just a list with a class name)
 ## the items inserted into this list/object will be called "selectors"
 RcssConstructor <- function() {  
-  ans <- list()
-  class(ans) <- "Rcss"  
-  return(ans)
+  structure(list(), class="Rcss")
 }
 
 
@@ -213,7 +204,7 @@ RcssConstructor <- function() {
 ## returns true if the Rcssclass has been defined for all the selectors
 ##
 RcssPropertiesContainsClass <- function(RcssProperties, Rcssclass) {
-  return (Rcssclass %in% names(RcssProperties$classes))  
+  exists(Rcssclass, RcssProperties$classes)
 }
 
 

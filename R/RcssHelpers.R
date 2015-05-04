@@ -27,10 +27,7 @@ RcssMakeCallCodeString <- function(varnames, listname) {
   if (length(varnames) == 0) {
     return ("")
   }
-  ans = sapply(as.list(varnames), function(x) {
-    return (paste0(x, "=", listname, "$", x))
-  })  
-  return (paste0(", ",paste(ans, collapse = ", ")));    
+  paste(sprintf(", %s=%s$%s", varnames, listname, varnames), collapse=" ") 
 }
 
 
