@@ -35,10 +35,12 @@ RcssGetDefaultStyle <- function() {
 }
 
 
-
-RcssSetDefaultClass <- function(Rcss) {
+#' @rdname  defaults
+#' @param class the default class
+#' @export
+RcssSetDefaultClass <- function(class) {
   ## default style is remembered using the options/getOption system
-  defaults$class=Rcss
+  defaults$class=class
 }
 
 
