@@ -21,7 +21,7 @@
 ## Perhaps some of these function could be generated automatically.
 ##
 
-RcssGeneric <- function(Rcss="default", Rcssclass, .f) {
+RcssGeneric <- function(Rcss="default", Rcssclass="default", .f) {
 
   # construct call
   RcssCall <- match.call(.f, sys.call())
@@ -33,7 +33,12 @@ RcssGeneric <- function(Rcss="default", Rcssclass, .f) {
     if (identical(Rcss, "default")) {
       Rcss <- defaults$style;
     }
+    if (identical(Rcssclass, "default")) {
+      Rcss <- defaults$class;
+    }
+
     
+        
     css <- RcssGetProperties(Rcss, as.character(RcssCall[[1]][[3]]), Rcssclass = Rcssclass)
     css[names(RcssCall)] <- NULL
     if(length(css) > 0) {
