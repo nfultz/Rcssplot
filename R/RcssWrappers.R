@@ -31,7 +31,7 @@ RcssGeneric <- function(Rcss="default", Rcssclass, .f) {
   if(!missing(Rcss) || !(formals()$Rcss == "")){
     ## convert between a description of a default Rcss to an actual object
     if (identical(Rcss, "default")) {
-      Rcss <- getOption("RcssDefaultStyle", default = NULL);
+      Rcss <- defaults$style;
     }
     
     css <- RcssGetProperties(Rcss, as.character(RcssCall[[1]][[3]]), Rcssclass = Rcssclass)
